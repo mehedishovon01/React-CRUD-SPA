@@ -12,15 +12,18 @@ export default class AllProducts extends Component {
         super(props);
         this.state={
             data:false,
-            store:null  
+            store:null
         }
     }
 
     componentDidMount(){
+        let val = localStorage.getItem('login');
+        let object = JSON.parse(val);
+        let auth_token="Bearer "+object.store
         fetch('http://127.0.0.1:8000/api/all-products', {
             method:"GET",
             headers: {
-                // "Authorization":item,
+                "Authorization":auth_token,
                 "Content-type": "application/json",
                 "Accept": "application/json"
             },
